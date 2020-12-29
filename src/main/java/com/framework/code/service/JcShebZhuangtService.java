@@ -20,4 +20,14 @@ public class JcShebZhuangtService extends BaseService<JcShebZhuangt, JcShebZhuan
         }
     }
 
+    /**
+     * 根据设备ID查询设备状态数据
+     * @param deviceId 设备ID
+     * @return JcShebZhuangt设备状态数据
+     */
+    public JcShebZhuangt queryByDeviceId(long deviceId) {
+        JcShebZhuangtExample where = new JcShebZhuangtExample();
+        where.createCriteria().andShebidEqualTo(deviceId);
+        return selectOneByExample(where);
+    }
 }

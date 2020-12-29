@@ -1,6 +1,8 @@
 package com.framework.netty;
 
+import com.framework.core.spring.SpringUtils;
 import com.framework.netty.message.ProtocolMsg;
+import com.google.common.eventbus.EventBus;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -14,6 +16,7 @@ public class ProtocolMsgHandler extends SimpleChannelInboundHandler<ProtocolMsg>
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ProtocolMsg msg) {
-        log.info("处理[隧道电伴热通讯协议]解码后的消息:{}", msg.toString());
+
+        SpringUtils.getBean(EventBus.class).post(msg);
     }
 }

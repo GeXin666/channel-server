@@ -1,109 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.framework.code.mapper.JcShebMapper">
-  <resultMap id="BaseResultMap" type="com.framework.code.domain.JcSheb">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="mingc" jdbcType="VARCHAR" property="mingc" />
-    <result column="jianp" jdbcType="VARCHAR" property="jianp" />
-    <result column="shebdz" jdbcType="INTEGER" property="shebdz" />
-    <result column="chuankfwqdkid" jdbcType="BIGINT" property="chuankfwqdkid" />
-    <result column="paixh" jdbcType="INTEGER" property="paixh" />
-    <result column="zhuangt" jdbcType="INTEGER" property="zhuangt" />
-    <result column="beiz" jdbcType="VARCHAR" property="beiz" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.framework.code.domain.JcSheb">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="mingc" jdbcType="VARCHAR" property="mingc"/>
+        <result column="jianp" jdbcType="VARCHAR" property="jianp"/>
+        <result column="shebdz" jdbcType="INTEGER" property="shebdz"/>
+        <result column="chuankfwqdkid" jdbcType="BIGINT" property="chuankfwqdkid"/>
+        <result column="paixh" jdbcType="INTEGER" property="paixh"/>
+        <result column="zhuangt" jdbcType="INTEGER" property="zhuangt"/>
+        <result column="beiz" jdbcType="VARCHAR" property="beiz"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, mingc, jianp, shebdz, chuankfwqdkid, paixh, zhuangt, beiz
   </sql>
-  <select id="selectByExample" parameterType="com.framework.code.domain.JcShebExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from jc_sheb
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from jc_sheb
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectByExample" parameterType="com.framework.code.domain.JcShebExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from jc_sheb
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jc_sheb
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from jc_sheb
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.framework.code.domain.JcShebExample">
-    delete from jc_sheb
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.framework.code.domain.JcSheb">
+    <delete id="deleteByExample" parameterType="com.framework.code.domain.JcShebExample">
+        delete from jc_sheb
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.framework.code.domain.JcSheb">
     insert into jc_sheb (id, mingc, jianp, 
       shebdz, chuankfwqdkid, paixh, 
       zhuangt, beiz)
@@ -111,141 +113,141 @@
       #{shebdz,jdbcType=INTEGER}, #{chuankfwqdkid,jdbcType=BIGINT}, #{paixh,jdbcType=INTEGER}, 
       #{zhuangt,jdbcType=INTEGER}, #{beiz,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.framework.code.domain.JcSheb">
-    insert into jc_sheb
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="mingc != null">
-        mingc,
-      </if>
-      <if test="jianp != null">
-        jianp,
-      </if>
-      <if test="shebdz != null">
-        shebdz,
-      </if>
-      <if test="chuankfwqdkid != null">
-        chuankfwqdkid,
-      </if>
-      <if test="paixh != null">
-        paixh,
-      </if>
-      <if test="zhuangt != null">
-        zhuangt,
-      </if>
-      <if test="beiz != null">
-        beiz,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="mingc != null">
-        #{mingc,jdbcType=VARCHAR},
-      </if>
-      <if test="jianp != null">
-        #{jianp,jdbcType=VARCHAR},
-      </if>
-      <if test="shebdz != null">
-        #{shebdz,jdbcType=INTEGER},
-      </if>
-      <if test="chuankfwqdkid != null">
-        #{chuankfwqdkid,jdbcType=BIGINT},
-      </if>
-      <if test="paixh != null">
-        #{paixh,jdbcType=INTEGER},
-      </if>
-      <if test="zhuangt != null">
-        #{zhuangt,jdbcType=INTEGER},
-      </if>
-      <if test="beiz != null">
-        #{beiz,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.framework.code.domain.JcShebExample" resultType="java.lang.Long">
-    select count(*) from jc_sheb
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update jc_sheb
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.mingc != null">
+    <insert id="insertSelective" parameterType="com.framework.code.domain.JcSheb">
+        insert into jc_sheb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="mingc != null">
+                mingc,
+            </if>
+            <if test="jianp != null">
+                jianp,
+            </if>
+            <if test="shebdz != null">
+                shebdz,
+            </if>
+            <if test="chuankfwqdkid != null">
+                chuankfwqdkid,
+            </if>
+            <if test="paixh != null">
+                paixh,
+            </if>
+            <if test="zhuangt != null">
+                zhuangt,
+            </if>
+            <if test="beiz != null">
+                beiz,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="mingc != null">
+                #{mingc,jdbcType=VARCHAR},
+            </if>
+            <if test="jianp != null">
+                #{jianp,jdbcType=VARCHAR},
+            </if>
+            <if test="shebdz != null">
+                #{shebdz,jdbcType=INTEGER},
+            </if>
+            <if test="chuankfwqdkid != null">
+                #{chuankfwqdkid,jdbcType=BIGINT},
+            </if>
+            <if test="paixh != null">
+                #{paixh,jdbcType=INTEGER},
+            </if>
+            <if test="zhuangt != null">
+                #{zhuangt,jdbcType=INTEGER},
+            </if>
+            <if test="beiz != null">
+                #{beiz,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.framework.code.domain.JcShebExample" resultType="java.lang.Long">
+        select count(*) from jc_sheb
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update jc_sheb
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.mingc != null">
+                mingc = #{record.mingc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.jianp != null">
+                jianp = #{record.jianp,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shebdz != null">
+                shebdz = #{record.shebdz,jdbcType=INTEGER},
+            </if>
+            <if test="record.chuankfwqdkid != null">
+                chuankfwqdkid = #{record.chuankfwqdkid,jdbcType=BIGINT},
+            </if>
+            <if test="record.paixh != null">
+                paixh = #{record.paixh,jdbcType=INTEGER},
+            </if>
+            <if test="record.zhuangt != null">
+                zhuangt = #{record.zhuangt,jdbcType=INTEGER},
+            </if>
+            <if test="record.beiz != null">
+                beiz = #{record.beiz,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update jc_sheb
+        set id = #{record.id,jdbcType=BIGINT},
         mingc = #{record.mingc,jdbcType=VARCHAR},
-      </if>
-      <if test="record.jianp != null">
         jianp = #{record.jianp,jdbcType=VARCHAR},
-      </if>
-      <if test="record.shebdz != null">
         shebdz = #{record.shebdz,jdbcType=INTEGER},
-      </if>
-      <if test="record.chuankfwqdkid != null">
         chuankfwqdkid = #{record.chuankfwqdkid,jdbcType=BIGINT},
-      </if>
-      <if test="record.paixh != null">
         paixh = #{record.paixh,jdbcType=INTEGER},
-      </if>
-      <if test="record.zhuangt != null">
         zhuangt = #{record.zhuangt,jdbcType=INTEGER},
-      </if>
-      <if test="record.beiz != null">
-        beiz = #{record.beiz,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update jc_sheb
-    set id = #{record.id,jdbcType=BIGINT},
-      mingc = #{record.mingc,jdbcType=VARCHAR},
-      jianp = #{record.jianp,jdbcType=VARCHAR},
-      shebdz = #{record.shebdz,jdbcType=INTEGER},
-      chuankfwqdkid = #{record.chuankfwqdkid,jdbcType=BIGINT},
-      paixh = #{record.paixh,jdbcType=INTEGER},
-      zhuangt = #{record.zhuangt,jdbcType=INTEGER},
-      beiz = #{record.beiz,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.framework.code.domain.JcSheb">
-    update jc_sheb
-    <set>
-      <if test="mingc != null">
-        mingc = #{mingc,jdbcType=VARCHAR},
-      </if>
-      <if test="jianp != null">
-        jianp = #{jianp,jdbcType=VARCHAR},
-      </if>
-      <if test="shebdz != null">
-        shebdz = #{shebdz,jdbcType=INTEGER},
-      </if>
-      <if test="chuankfwqdkid != null">
-        chuankfwqdkid = #{chuankfwqdkid,jdbcType=BIGINT},
-      </if>
-      <if test="paixh != null">
-        paixh = #{paixh,jdbcType=INTEGER},
-      </if>
-      <if test="zhuangt != null">
-        zhuangt = #{zhuangt,jdbcType=INTEGER},
-      </if>
-      <if test="beiz != null">
-        beiz = #{beiz,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.framework.code.domain.JcSheb">
+        beiz = #{record.beiz,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.framework.code.domain.JcSheb">
+        update jc_sheb
+        <set>
+            <if test="mingc != null">
+                mingc = #{mingc,jdbcType=VARCHAR},
+            </if>
+            <if test="jianp != null">
+                jianp = #{jianp,jdbcType=VARCHAR},
+            </if>
+            <if test="shebdz != null">
+                shebdz = #{shebdz,jdbcType=INTEGER},
+            </if>
+            <if test="chuankfwqdkid != null">
+                chuankfwqdkid = #{chuankfwqdkid,jdbcType=BIGINT},
+            </if>
+            <if test="paixh != null">
+                paixh = #{paixh,jdbcType=INTEGER},
+            </if>
+            <if test="zhuangt != null">
+                zhuangt = #{zhuangt,jdbcType=INTEGER},
+            </if>
+            <if test="beiz != null">
+                beiz = #{beiz,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.framework.code.domain.JcSheb">
     update jc_sheb
     set mingc = #{mingc,jdbcType=VARCHAR},
       jianp = #{jianp,jdbcType=VARCHAR},
@@ -256,34 +258,40 @@
       beiz = #{beiz,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectPage" parameterType="hashmap" resultMap="BaseResultMap">
-    SELECT <include refid="Base_Column_List" /> FROM jc_sheb
-    <where>
-      <if test="id != null"> 
- and id = #{id,jdbcType=BIGINT} 
- </if> 
-<if test="mingc != null"> 
- and mingc = #{mingc,jdbcType=VARCHAR} 
- </if> 
-<if test="jianp != null"> 
- and jianp = #{jianp,jdbcType=VARCHAR} 
- </if> 
-<if test="shebdz != null"> 
- and shebdz = #{shebdz,jdbcType=INTEGER} 
- </if> 
-<if test="chuankfwqdkid != null"> 
- and chuankfwqdkid = #{chuankfwqdkid,jdbcType=BIGINT} 
- </if> 
-<if test="paixh != null"> 
- and paixh = #{paixh,jdbcType=INTEGER} 
- </if> 
-<if test="zhuangt != null"> 
- and zhuangt = #{zhuangt,jdbcType=INTEGER} 
- </if> 
-<if test="beiz != null"> 
- and beiz = #{beiz,jdbcType=VARCHAR} 
- </if> 
-
-    </where>
-  </select>
+    <select id="selectPage" parameterType="hashmap" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM jc_sheb
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="mingc != null">
+                and mingc = #{mingc,jdbcType=VARCHAR}
+            </if>
+            <if test="jianp != null">
+                and jianp = #{jianp,jdbcType=VARCHAR}
+            </if>
+            <if test="shebdz != null">
+                and shebdz = #{shebdz,jdbcType=INTEGER}
+            </if>
+            <if test="chuankfwqdkid != null">
+                and chuankfwqdkid = #{chuankfwqdkid,jdbcType=BIGINT}
+            </if>
+            <if test="paixh != null">
+                and paixh = #{paixh,jdbcType=INTEGER}
+            </if>
+            <if test="zhuangt != null">
+                and zhuangt = #{zhuangt,jdbcType=INTEGER}
+            </if>
+            <if test="beiz != null">
+                and beiz = #{beiz,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    
+    <!-- @@ -->
+    <select id="queryDeviceId" resultType="java.lang.Long">
+        select id from v_jc_sheb where ip = #{ip,jdbcType=VARCHAR} and duank = #{port,jdbcType=INTEGER}
+    </select>
 </mapper>
