@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+	<!-- 根据不同数据库选择驱动   注意路径改成你自己的绝对路径   -->
+	<classPathEntry location="D:\Java\Software\Maven3.5\MavenLocalRepository\mysql\mysql-connector-java\5.1.43\mysql-connector-java-5.1.43.jar" />
+	
+	<context id="contextOne">
+		<!-- 插件扩展代码生成 -->
+		<plugin type="com.framework.generate.mybaits.MyBatisCodePlugin"></plugin>
+		
+		<!-- 控制生成注释  不要修改 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		
+		<!-- 数据库的连接串-->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+	        connectionURL="jdbc:mysql://192.168.80.111:3306/channeldb?verifyServerCertificate=false"
+	        userId="root"
+	        password="Sql2008!@#">
+	    </jdbcConnection>
+
+		<!-- 类型转换器 -->
+		<javaTypeResolver type="com.framework.generate.mybaits.MyBatisTypeConvert" />
+
+		<!-- 实体类  (targetPackage="com.framework.code.domain"这里是生成的包名，要和程序实际包名一致) -->
+		<javaModelGenerator targetPackage="com.framework.code.domain"
+			targetProject=".\src\test\java">
+		</javaModelGenerator>
+
+		<!-- mapper.xml (targetPackage="com.framework.code.mapper"这里是生成的包名，要和程序实际包名一致) -->
+		<sqlMapGenerator targetPackage="com.framework.code.mapper"
+			targetProject=".\src\test\java" />
+
+		<!-- mapper.java (targetPackage="com.framework.code.mapper"这里是生成的包名，要和程序实际包名一致) -->
+		<!--<javaClientGenerator targetPackage="com.framework.code.mapper.system"
+			targetProject=".\src\test\java" type="XMLMAPPER" />-->
+			
+		<!-- 这里你填写你自己模块的表名称  tableName="你要生成的数据库表名" -->
+		<table schema="" tableName="ls_sheb_jiaoy"
+		   enableCountByExample="true" enableUpdateByExample="true"
+		   enableDeleteByExample="true" enableSelectByExample="true"
+		   selectByExampleQueryId="true"
+		></table>
+		
+	</context>
+</generatorConfiguration>
