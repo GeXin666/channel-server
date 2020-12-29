@@ -1,5 +1,7 @@
 package com.framework.netty;
 
+import com.framework.core.excepton.OperationException;
+import com.framework.core.uitls.AppUtil;
 import com.framework.netty.message.ProtocolMsg;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
@@ -20,6 +22,7 @@ public class TunnelProtocolEncoder extends SimpleChannelInboundHandler<ByteBuf> 
     protected void channelRead0(ChannelHandlerContext ctx, ByteBuf buf) {
         log.info("开始解码[隧道电伴热通讯协议] HEX:[{}]", ByteBufUtil.hexDump(buf).toUpperCase());
 
+        byte[] crcBytes = ByteBufUtil.getBytes(buf, 0, 21);
         InetSocketAddress ipSocket = (InetSocketAddress) ctx.channel().remoteAddress();
         final String clientIp = ipSocket.getAddress().getHostAddress();
         final int clientPort = ipSocket.getPort();
@@ -46,8 +49,13 @@ public class TunnelProtocolEncoder extends SimpleChannelInboundHandler<ByteBuf> 
         msg.setWend3(buf.readShort());
         msg.setShid(buf.readShort());
         msg.setGongzms(buf.readShort());
-        buf.readShort();
 
+        int crcValue1 = buf.readUnsignedShort();
+        int ctcValue2 = AppUtil.getCRC(crcBytes);
+        if(crcValue1 != ctcValue2) {
+            log.warn("CRC验证失败 crcValue1:{} ctcValue2:{}", crcValue1, ctcValue2);
+            ctx.channel().pipeline().fireExceptionCaught(new OperationException("CRC验证失败"));
+        }
         ctx.fireChannelRead(msg);
     }
 }

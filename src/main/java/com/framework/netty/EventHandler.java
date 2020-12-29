@@ -27,6 +27,5 @@ public class EventHandler extends ChannelInboundHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         log.error("exceptionCaught:{}", ctx.channel().toString(), cause);
         ctx.channel().close();
-        super.exceptionCaught(ctx, cause);
     }
 }

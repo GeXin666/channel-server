@@ -16,7 +16,6 @@ public class ProtocolMsgHandler extends SimpleChannelInboundHandler<ProtocolMsg>
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ProtocolMsg msg) {
-
         SpringUtils.getBean(EventBus.class).post(msg);
     }
 }
