@@ -46,8 +46,7 @@ public class JcShebService extends BaseService<JcSheb, JcShebExample> {
         Long deivceId = this.queryDeviceId(msg.getIp(), msg.getPort());
         if(deivceId == null || deivceId.longValue() == 0) {
             log.warn("设备ID不存在.请初始化基础数据 ip:{} port:{}", msg.getIp(), msg.getPort());
-            //return;
-            deivceId = 100L;
+            return;
         }
 
         //新增交易流水
