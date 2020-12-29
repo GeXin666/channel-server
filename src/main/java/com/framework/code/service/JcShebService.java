@@ -46,7 +46,8 @@ public class JcShebService extends BaseService<JcSheb, JcShebExample> {
         Long deivceId = this.queryDeviceId(msg.getIp(), msg.getPort());
         if(deivceId == null || deivceId.longValue() == 0) {
             log.warn("设备ID不存在.请初始化基础数据 ip:{} port:{}", msg.getIp(), msg.getPort());
-            return;
+            //return;
+            deivceId = 100L;
         }
 
         //新增交易流水
@@ -73,10 +74,10 @@ public class JcShebService extends BaseService<JcSheb, JcShebExample> {
 
         JcShebZhuangt zhuangt = jcShebZhuangtService.queryByDeviceId(deivceId);
         if(zhuangt == null) {
-            log.warn("通过设备ID:[{}] 查询不到设备状态数据.请先初始化基础数据", deivceId);
-            return;
+            zhuangt = new JcShebZhuangt();
+            zhuangt.setShebid(deivceId);
+            log.info("通过设备ID:[{}]查询不到设备状态信息.新增数据", deivceId);
         }
-
         zhuangt.setCansbbid(msg.getCsbb());
         zhuangt.setWenkzt1((int) msg.getWenkzt1());
         zhuangt.setWenkzt2((int) msg.getWenkzt2());
@@ -89,7 +90,7 @@ public class JcShebService extends BaseService<JcSheb, JcShebExample> {
         zhuangt.setWend3((int) msg.getWend3());
         zhuangt.setShid((int) msg.getShid());
         zhuangt.setGongzms((int) msg.getGongzms());
-        jcShebZhuangtService.updateByPrimaryKey(zhuangt);
+        jcShebZhuangtService.insertOrUpdate(zhuangt);
         log.info("更新设备状态成功.设备ID:[{}]", deivceId);
     }
 
