@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component
 @Slf4j
+@Component
 public class NettyServer {
 
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);

@@ -14,9 +14,9 @@ import java.net.InetSocketAddress;
 
 @Slf4j
 @ChannelHandler.Sharable
-public class TunnelProtocolEncoder extends SimpleChannelInboundHandler<ByteBuf> {
+public class TunnelProtocolDncoder extends SimpleChannelInboundHandler<ByteBuf> {
 
-    public static final TunnelProtocolEncoder INSTANCE = new TunnelProtocolEncoder();
+    public static final TunnelProtocolDncoder INSTANCE = new TunnelProtocolDncoder();
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ByteBuf buf) {

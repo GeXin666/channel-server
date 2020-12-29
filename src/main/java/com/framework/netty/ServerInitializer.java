@@ -15,7 +15,7 @@ public class ServerInitializer extends ChannelInitializer<NioSocketChannel> {
         pipeline.addLast("log", new LoggingHandler(LogLevel.DEBUG));
         pipeline.addLast("eventHandler", EventHandler.INSTANCE);
         pipeline.addLast("fixedDecoder", new FixedLengthFrameDecoder(23));
-        pipeline.addLast("protocolEncoder", TunnelProtocolEncoder.INSTANCE);
+        pipeline.addLast("protocolEncoder", TunnelProtocolDncoder.INSTANCE);
         pipeline.addLast("protocolMsgHandler", ProtocolMsgHandler.INSTANCE);
     }
 }
