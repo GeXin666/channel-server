@@ -22,6 +22,7 @@ public class DataSourceConfig {
             ds.setJdbcUrl("jdbc:mysql://192.168.80.111:3306/pay_center?verifyServerCertificate=false&useUnicode=true&useSSL=false");
             //如果 breakAfterAcquireFailure=true ，一旦pool向数据库请求连接失败，就会标记pool block并关闭pool，
             //这样无论数据库是否恢复正常，应用端都无法从pool拿到连接
+            //这个值一定要设置为false 不然数据库重启后连接不会更新
             ds.setBreakAfterAcquireFailure(false);
 
             //连接池中保留的最小连接数，默认为3
